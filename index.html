@@ -335,6 +335,31 @@
           </li>
           <li>
             <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-user-information" class="toc-h2 toc-link" data-title="Get user information">Get user information</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#problems" class="toc-h1 toc-link" data-title="Problems">Problems</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-problem-information" class="toc-h2 toc-link" data-title="Get problem information">Get problem information</a>
+                  </li>
+                  <li>
+                    <a href="#get-submission-information" class="toc-h2 toc-link" data-title="Get submission information">Get submission information</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-submission-of-a-problem" class="toc-h2 toc-link" data-title="Get all submission of a problem">Get all submission of a problem</a>
+                  </li>
+                  <li>
+                    <a href="#submit-a-solution" class="toc-h2 toc-link" data-title="Submit a solution">Submit a solution</a>
+                  </li>
+                  <li>
+                    <a href="#download-submission-source" class="toc-h2 toc-link" data-title="Download submission source">Download submission source</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -446,7 +471,289 @@
 <p>By sending a <code>DELETE</code> request to the logout endpoint, you will logout your account. This means that your refresh token is invalidated and removed from the database, and you will no longer be able to refresh your access token.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>DELETE http://example.com/logout</code></p>
-<h1 id='user'>User</h1><h1 id='errors'>Errors</h1>
+<h1 id='user'>User</h1><h2 id='get-user-information'>Get user information</h2>
+<blockquote>
+<p>To get user information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/user"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the user information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATED_AT_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPDATED_AT_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the user endpoint, you will get the user information.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET http://example.com/user</code></p>
+<h3 id='expected-response-2'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the user information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The user is not found</td>
+</tr>
+</tbody></table>
+<h1 id='problems'>Problems</h1><h2 id='get-problem-information'>Get problem information</h2>
+<blockquote>
+<p>To get problem information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/problem/{problemId}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the problem information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Problem John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the description of problem 1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statementFile"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/problem/1/statement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATED_AT_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPDATED_AT_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET http://example.com/problem/{problemId}</code></p>
+<h3 id='expected-response-3'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the problem information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-submission-information'>Get submission information</h2>
+<blockquote>
+<p>To get submission information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/submission/{submissionId}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"problemId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCEPTED"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATED_AT_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPDATED_AT_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the submission endpoint, you will get the submission information.</p>
+
+<p>For submissions with file-type source, the source will be a link to the file.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET http://example.com/submission/{submissionId}</code></p>
+<h3 id='expected-response-4'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-submission-of-a-problem'>Get all submission of a problem</h2>
+<blockquote>
+<p>To get all submission of a problem, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/problem/{problemId}/submissions"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"problemId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCEPTED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATED_AT_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPDATED_AT_HERE"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"problemId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"userId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCEPTED"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATED_AT_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"UPDATED_AT_HERE"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the problem/{problemId}/submissions endpoint, you will get a submission list of the problem. This is the same as running <a href="#getSubmissionInformation">#getSubmissionInformation</a> for each submission.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET http://example.com/problem/{problemId}/submissions</code></p>
+<h3 id='expected-response-5'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission list</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='submit-a-solution'>Submit a solution</h2>
+<blockquote>
+<p>To submit a solution, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> <span class="s2">"POST"</span> <span class="s2">"https://example.com/submission"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "problemId": "1",
+    "language": "CPP",
+    "source": "SOURCE_HERE"
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return a no content response.</p>
+</blockquote>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>POST http://example.com/problem/{problemId}/submit</code></p>
+<h3 id='expected-response-6'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>OK. Return the submission information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='download-submission-source'>Download submission source</h2>
+<blockquote>
+<p>To download submission source, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/submission/{submissionId}/source"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission source like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the submission/{submissionId}/source endpoint, you will get the submission source.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET http://example.com/submission/{submissionId}/source</code></p>
+<h3 id='expected-response-7'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission source</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
 <aside class="notice">
 These error codes below are expected to be returned by the API whenever the it receives a bad requests, unauthorized request, or anything else prevent it to return a valid response.
 </aside>
