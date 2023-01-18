@@ -1,0 +1,100 @@
+<h1 id='authentication'>Authentication</h1>
+<p>ExamHut API use <a href="https://jwt.io/">JWT</a> for authentication. To get a token, you need to send a <code>POST</code> request to the login endpoint with your credentials, which will be described in the next section.</p>
+<h2 id='login'>Login</h2>
+<blockquote>
+<p>To login, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/login"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "username": "$USERNAME",
+    "password": "$PASSWORD"
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command return JSON contains the access token and the refresh token:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACCESS_TOKEN_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REFRESH_TOKEN_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>Login requires a username and a password. By sending a <code>POST</code> request to the login endpoint with your credentials, you will receive a access token AND a refresh token (you can read about them <a href="https://auth0.com/blog/refresh-tokens-what-are-they-and-when-to-use-them/">here</a>).</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST http://example.com/login</code></p>
+<h3 id='request-body'>Request Body</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Your username</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>Your password</td>
+</tr>
+</tbody></table>
+<h3 id='expected-response'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the access token and the refresh token</td>
+</tr>
+<tr>
+<td>400</td>
+<td>The request is invalid</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The provided credentials are invalid</td>
+</tr>
+</tbody></table>
+<h2 id='access-token'>Access Token</h2>
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"api_endpoint_here"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<p>You can use your access token to authorize your requests. The lifespan is really short, so you should make sure to refresh it regularly with the refresh token, which will be described in the next section.</p>
+<h2 id='refresh-token'>Refresh Token</h2>
+<blockquote>
+<p>To refresh your access token, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code></code></pre></div>
+<blockquote>
+<p>This will return JSON contains the new access token:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NEW_ACCESS_TOKEN_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>As the access token is short-lived, it should be refreshed regularly (or at least right after you receive a forbidden response). The refresh token is long-lived, so make sure to store it in a safe place.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/token/refresh</code></p>
+<h2 id='logout'>Logout</h2>
+<blockquote>
+<p>To logout, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> <span class="s2">"DELETE"</span> <span class="s2">"http://example.com/logout"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return a 204 No Content response.</p>
+</blockquote>
+
+<p>By sending a <code>DELETE</code> request to the logout endpoint, you will logout your account. This means that your refresh token is invalidated and removed from the database, and you will no longer be able to refresh your access token.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>DELETE http://example.com/logout</code></p>

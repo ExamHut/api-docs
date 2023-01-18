@@ -1,0 +1,267 @@
+<h1 id='problems'>Problems</h1><h2 id='get-problem-information'>Get problem information</h2>
+<blockquote>
+<p>To get problem information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/problem/{problemId}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the problem information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Problem John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"statement_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/problem/1/statement"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"time_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"memory_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"256"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/problem/{problemId}</code></p>
+<h3 id='expected-response'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the problem information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-submission-information'>Get submission information</h2>
+<blockquote>
+<p>To get submission information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/submission/{submissionId}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"problem_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPP"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBMISSION_DATE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"memory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"current_testcase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"case_points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"case_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"judged_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"judged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"rejudged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REJUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_pretested"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the submission endpoint, you will get the submission information.</p>
+
+<p>For submissions with file-type source, the source will be a link to the file.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/submission/{submissionId}</code></p>
+<h3 id='expected-response-2'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-submission-of-a-problem'>Get all submission of a problem</h2>
+<blockquote>
+<p>To get all submission of a problem, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/problem/{problemId}/submissions"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"problem_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CPP"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBMISSION_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"current_testcase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"case_points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"case_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"judged_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"judged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rejudged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REJUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_pretested"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"problem_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Completed"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Accepted"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUBMISSION_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memory"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"current_testcase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"case_points"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"case_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"judged_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"judged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"rejudged_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REJUDGED_DATE_HERE"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"is_pretested"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the problem/{problemId}/submissions endpoint, you will get a submission list of the problem. This is the same as running <a href="#getSubmissionInformation">#getSubmissionInformation</a> for each submission.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://example.com/problem/{problemId}/submissions</code></p>
+<h3 id='expected-response-3'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission list</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='submit-a-solution'>Submit a solution</h2>
+<blockquote>
+<p>To submit a solution, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> <span class="s2">"POST"</span> <span class="s2">"https://example.com/submission"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "problem_id": "1",
+    "language": "CPP",
+    "source": "SOURCE_HERE"
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return a no content response.</p>
+</blockquote>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST http://example.com/problem/{problemId}/submit</code></p>
+<h3 id='expected-response-4'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>201</td>
+<td>OK. Return the submission information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The problem is not found</td>
+</tr>
+</tbody></table>
+<h2 id='download-submission-source'>Download submission source</h2>
+<blockquote>
+<p>To download submission source, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/submission/{submissionId}/source"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the submission source like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE_HERE"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the submission/{submissionId}/source endpoint, you will get the submission source.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET http://example.com/submission/{submissionId}/source</code></p>
+<h3 id='expected-response-5'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission source</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>

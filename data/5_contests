@@ -1,0 +1,155 @@
+<h1 id='contests'>Contests</h1><h2 id='get-contest-information-todo'>Get contest information (TODO)</h2>
+<blockquote>
+<p>To get contest info, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/contest/{contestId}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the contest information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_contest"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Contest"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example contest description."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"startDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"START_DATE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"endDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"END_DATE_HERE"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">minutes</span><span class="w">
+  </span><span class="nl">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">author</span><span class="w">
+  </span><span class="nl">"class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">class</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the contest/{contestId} endpoint, you will get the contest information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/contest/{contestId}</code></p>
+<h3 id='expected-response'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission source</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-contest-problems-todo'>Get contest problems (TODO)</h2>
+<blockquote>
+<p>To get problems of a contest, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/contest/{contestId}/problems"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the contest problems like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Problem John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"statement_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/problem/1/statement"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memory_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"256"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"not_john_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not problem John Doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"statement_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://example.com/problem/2/statement"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"time_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"memory_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the contest/{contestId}/problems endpoint, you will get the contest problems.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/contest/{contestId}/problems</code></p>
+<h3 id='expected-response-2'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission source</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-contest-participants-todo'>Get contest participants (TODO)</h2>
+<blockquote>
+<p>To get participants of a contest, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/contest/{contestId}/participants"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the contest participants like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"not_john_doe"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not John Doe"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the contest/{contestId}/participants endpoint, you will get the contest participants.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET http://example.com/contest/{contestId}/participants</code></p>
+<h3 id='expected-response-3'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the submission source</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The submission is not found</td>
+</tr>
+</tbody></table>

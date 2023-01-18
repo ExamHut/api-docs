@@ -1,0 +1,89 @@
+<h1 id='user'>User</h1><h2 id='get-user-information'>Get user information</h2>
+<blockquote>
+<p>To get user information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/user"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the user information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john_doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Doe"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"johndoe@example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"classes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">(TODO)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the user endpoint, you will get the user information.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET http://example.com/user</code></p>
+<h3 id='expected-response'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the user information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The user is not found</td>
+</tr>
+</tbody></table>
+<h2 id='get-class-information-todo'>Get class information (TODO)</h2>
+<blockquote>
+<p>To get class information, use this code:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://example.com/class/{class_id}"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer </span><span class="nv">$YOUR_TOKEN</span><span class="s2">"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command will return JSON contains the user information like the example below:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sample_class"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sample Class"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">(TODO)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>By sending a <code>GET</code> request to the class endpoint, you will get the class information.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET http://example.com/class/{class_id}</code></p>
+<h3 id='expected-response-2'>Expected Response</h3>
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>200</td>
+<td>OK. Return the class information</td>
+</tr>
+<tr>
+<td>401</td>
+<td>The request is unauthorized</td>
+</tr>
+<tr>
+<td>403</td>
+<td>The request is forbidden</td>
+</tr>
+<tr>
+<td>404</td>
+<td>The class is not found</td>
+</tr>
+</tbody></table>
