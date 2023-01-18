@@ -23,6 +23,7 @@ meta:
 
 Welcome to the ExamHut API Documentation!
 
+
 # Authentication
 
 ExamHut API use [JWT](https://jwt.io/) for authentication. To get a token, you need to send a `POST` request to the login endpoint with your credentials, which will be described in the next section.
@@ -120,6 +121,7 @@ By sending a `DELETE` request to the logout endpoint, you will logout your accou
 
 `DELETE http://example.com/logout`
 
+
 # User
 
 ## Get user information
@@ -137,9 +139,9 @@ curl "https://example.com/user" \
 {
   "id": "1",
   "username": "john_doe",
+  "name": "John Doe",
   "email": "johndoe@example.com",
-  "created_at": "CREATED_AT_HERE",
-  "updated_at": "UPDATED_AT_HERE"
+  "classes": [1, 2, 3] // (TODO)
 }
 ```
 
@@ -158,6 +160,42 @@ Code | Description
 403 | The request is forbidden
 404 | The user is not found
 
+## Get class information (TODO)
+
+> To get class information, use this code:
+
+```shell
+curl "https://example.com/class/{class_id}" \
+  -H "Authorization: Bearer $YOUR_TOKEN"
+```
+
+> The above command will return JSON contains the user information like the example below:
+
+```json
+{
+  "id": "1",
+  "code": "sample_class",
+  "name": "Sample Class",
+  "users": [1, 2, 3] // (TODO)
+}
+```
+
+By sending a `GET` request to the class endpoint, you will get the class information.
+
+### HTTP Request
+
+`GET http://example.com/class/{class_id}`
+
+### Expected Response
+
+Code | Description
+---- | -----------
+200 | OK. Return the class information
+401 | The request is unauthorized
+403 | The request is forbidden
+404 | The class is not found
+
+
 # Problems
 
 ## Get problem information
@@ -174,11 +212,11 @@ curl "https://example.com/problem/{problemId}" \
 ```json
 {
   "id": "1",
-  "title": "Problem John Doe",
-  "description": "This is the description of problem 1",
-  "statementFile": "https://example.com/problem/1/statement",
-  "created_at": "CREATED_AT_HERE",
-  "updated_at": "UPDATED_AT_HERE"
+  "code": "john_doe",
+  "name": "Problem John Doe",
+  "statement_file": "https://example.com/problem/1/statement",
+  "time_limit": "1.0",
+  "memory_limit": "256"
 }
 ```
 
@@ -209,13 +247,23 @@ curl "https://example.com/submission/{submissionId}" \
 ```json
 {
   "id": "1",
-  "problemId": "1",
-  "userId": "1",
+  "problem_id": "1",
+  "user_id": "1",
   "language": "CPP",
-  "source": "SOURCE_HERE",
-  "status": "ACCEPTED",
-  "created_at": "CREATED_AT_HERE",
-  "updated_at": "UPDATED_AT_HERE"
+  "status": "Completed",
+  "result": "Accepted",
+  "date": "SUBMISSION_DATE_HERE",
+  "time": "1.0",
+  "memory": "1.0",
+  "points": "100.0",
+  "current_testcase": "1",
+  "error": "ERROR_HERE",
+  "case_points": "1",
+  "case_total": "1",
+  "judged_on": "JUDGE_HERE",
+  "judged_date": "JUDGED_DATE_HERE",
+  "rejudged_date": "REJUDGED_DATE_HERE",
+  "is_pretested": "true"
 }
 ```
 
@@ -251,23 +299,43 @@ curl "https://example.com/problem/{problemId}/submissions" \
 [
   {
     "id": "1",
-    "problemId": "1",
-    "userId": "1",
+    "problem_id": "1",
+    "user_id": "1",
     "language": "CPP",
-    "source": "SOURCE_HERE",
-    "status": "ACCEPTED",
-    "created_at": "CREATED_AT_HERE",
-    "updated_at": "UPDATED_AT_HERE"
+    "status": "Completed",
+    "result": "Accepted",
+    "date": "SUBMISSION_DATE_HERE",
+    "time": "1.0",
+    "memory": "1.0",
+    "points": "100.0",
+    "current_testcase": "1",
+    "error": "ERROR_HERE",
+    "case_points": "1",
+    "case_total": "1",
+    "judged_on": "JUDGE_HERE",
+    "judged_date": "JUDGED_DATE_HERE",
+    "rejudged_date": "REJUDGED_DATE_HERE",
+    "is_pretested": "true"
   },
   {
     "id": "2",
-    "problemId": "1",
-    "userId": "1",
-    "language": "CPP",
-    "source": "SOURCE_HERE",
-    "status": "ACCEPTED",
-    "created_at": "CREATED_AT_HERE",
-    "updated_at": "UPDATED_AT_HERE"
+    "problem_id": "2",
+    "user_id": "2",
+    "language": "PY",
+    "status": "Completed",
+    "result": "Accepted",
+    "date": "SUBMISSION_DATE_HERE",
+    "time": "1.0",
+    "memory": "1.0",
+    "points": "100.0",
+    "current_testcase": "1",
+    "error": "ERROR_HERE",
+    "case_points": "1",
+    "case_total": "1",
+    "judged_on": "JUDGE_HERE",
+    "judged_date": "JUDGED_DATE_HERE",
+    "rejudged_date": "REJUDGED_DATE_HERE",
+    "is_pretested": "true"
   }
 ]
 ```
@@ -296,7 +364,7 @@ curl -X "POST" "https://example.com/submission" \
   -H "Authorization: Bearer $YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "problemId": "1",
+    "problem_id": "1",
     "language": "CPP",
     "source": "SOURCE_HERE"
   }'
@@ -339,6 +407,136 @@ By sending a `GET` request to the submission/{submissionId}/source endpoint, you
 ### HTTP Request
 
 `GET http://example.com/submission/{submissionId}/source`
+
+### Expected Response
+
+Code | Description
+---- | -----------
+200 | OK. Return the submission source
+401 | The request is unauthorized
+403 | The request is forbidden
+404 | The submission is not found
+
+# Contests
+
+## Get contest information (TODO)
+
+> To get contest info, use this code:
+
+```shell
+curl "https://example.com/contest/{contestId}" \
+  -H "Authorization: Bearer $YOUR_TOKEN"
+```
+
+> The above command will return JSON contains the contest information like the example below:
+
+```json
+{
+  "id": "1",
+  "code": "example_contest",
+  "name": "Example Contest",
+  "description": "Example contest description.",
+  "startDate": "START_DATE_HERE",
+  "endDate": "END_DATE_HERE",
+  "duration": "100", // minutes
+  "author": "1", // id of author
+  "class": "1", // id of class
+}
+```
+
+By sending a `GET` request to the contest/{contestId} endpoint, you will get the contest information.
+
+### HTTP Request
+
+`GET http://example.com/contest/{contestId}`
+
+### Expected Response
+
+Code | Description
+---- | -----------
+200 | OK. Return the submission source
+401 | The request is unauthorized
+403 | The request is forbidden
+404 | The submission is not found
+
+## Get contest problems (TODO)
+
+> To get problems of a contest, use this code:
+
+```shell
+curl "https://example.com/contest/{contestId}/problems" \
+  -H "Authorization: Bearer $YOUR_TOKEN"
+```
+
+> The above command will return JSON contains the contest problems like the example below:
+
+```json
+[
+  {
+    "id": "1",
+    "code": "john_doe",
+    "name": "Problem John Doe",
+    "statement_file": "https://example.com/problem/1/statement",
+    "time_limit": "1.0",
+    "memory_limit": "256"
+  },
+  {
+    "id": "2",
+    "code": "not_john_doe",
+    "name": "Not problem John Doe",
+    "statement_file": "https://example.com/problem/2/statement",
+    "time_limit": "3.0",
+    "memory_limit": "512"
+  }
+]
+```
+
+By sending a `GET` request to the contest/{contestId}/problems endpoint, you will get the contest problems.
+
+### HTTP Request
+
+`GET http://example.com/contest/{contestId}/problems`
+
+### Expected Response
+
+Code | Description
+---- | -----------
+200 | OK. Return the submission source
+401 | The request is unauthorized
+403 | The request is forbidden
+404 | The submission is not found
+
+## Get contest participants (TODO)
+
+> To get participants of a contest, use this code:
+
+```shell
+curl "https://example.com/contest/{contestId}/participants" \
+  -H "Authorization: Bearer $YOUR_TOKEN"
+```
+
+> The above command will return JSON contains the contest participants like the example below:
+
+```json
+[
+  {
+    "id": "1",
+    "username": "john_doe",
+    "name": "John Doe"
+  },
+  {
+    "id": "2",
+    "username": "not_john_doe",
+    "name": "Not John Doe"
+  }
+]
+```
+
+By sending a `GET` request to the contest/{contestId}/participants endpoint, you will get the contest participants.
+
+### HTTP Request
+
+`GET http://example.com/contest/{contestId}/participants`
 
 ### Expected Response
 
